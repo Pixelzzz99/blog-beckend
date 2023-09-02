@@ -17,5 +17,6 @@ export const envConfig = () => ({
     DB_USERNAME: Joi.string(),
     DB_PASSWORD: Joi.string(),
     DB_DATABASE: Joi.string(),
+    JWT_SECRET: Joi.string(),
   }),
 });

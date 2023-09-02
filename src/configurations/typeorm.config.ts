@@ -1,3 +1,4 @@
+import { Post } from 'src/posts/entities/post.entity';
 import { User } from 'src/users/entities/user.entity';
 
 export enum TypeDb {
@@ -5,6 +6,7 @@ export enum TypeDb {
   mysql = 'mysql',
   sqlite = 'sqlite',
   mariadb = 'mariadb',
+  oracle = 'oracle',
 }
 
 export const ormConfig = () => ({
@@ -14,6 +16,6 @@ export const ormConfig = () => ({
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
-  entities: [User],
+  entities: [User, Post],
   synchronize: true,
 });
