@@ -6,6 +6,7 @@ import { ormConfig } from './configurations/typeorm.config';
 import { envConfig } from './configurations/env.config';
 import { UsersModule } from './users/users.module';
 import { PostsModule } from './posts/posts.module';
+import { UploadsModule } from './uploads/uploads.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { PostsModule } from './posts/posts.module';
     UsersModule,
     AuthModule,
     PostsModule,
+    UploadsModule,
   ],
   controllers: [],
   providers: [],
