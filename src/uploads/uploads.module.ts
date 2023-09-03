@@ -1,13 +1,17 @@
 import { Module } from '@nestjs/common';
-import { MulterModule } from '@nestjs/platform-express';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { path } from 'app-root-path';
 import { UploadsController } from './uploads.controller';
+import { UploadsService } from './uploads.service';
 
 @Module({
   imports: [
-    MulterModule.register({
-      dest: './uploads',
+    ServeStaticModule.forRoot({
+      rootPath: `${path}/uploads`,
+      serveRoot: '/static',
     }),
   ],
   controllers: [UploadsController],
+  providers: [UploadsService],
 })
 export class UploadsModule {}

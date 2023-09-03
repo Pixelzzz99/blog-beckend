@@ -7,13 +7,16 @@ import {
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { AuthGuard } from 'src/auth/auth.guard';
+import { UploadsService } from './uploads.service';
 
 @Controller('uploads')
 export class UploadsController {
+  constructor(private readonly uploadsService: UploadsService) {}
+
   @UseGuards(AuthGuard)
   @Post()
   @UseInterceptors(FileInterceptor('file'))
-  uploadFile(@UploadedFile() file: Express.Multer.File) {
-    return { url: `http://localhost:3000/uploads/${file.originalname}` };
+  async uploadFile(@UploadedFile() file: Express.Multer.File) {
+    return await this.uploadsService.uploadFile(file);
   }
 }

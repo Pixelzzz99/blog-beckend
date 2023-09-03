@@ -38,4 +38,4 @@ lerna-debug.log*
 .dev.env
 .prod.env
 
-
+/uploads

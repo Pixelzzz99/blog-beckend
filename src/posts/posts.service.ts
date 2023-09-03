@@ -16,14 +16,6 @@ export class PostsService {
     userId,
   ): Promise<Post | HttpException> {
     try {
-      const allowedCreate = ['title', 'content', 'tags', 'imageUrl'];
-      if (!this.checkExtraFields(createPostDto, allowedCreate)) {
-        return new HttpException(
-          'Invalid create! Only these fields are allowed: title, content, tags, imageUrl',
-          HttpStatus.BAD_REQUEST,
-        );
-      }
-
       const { title, content, tags, imageUrl } = createPostDto;
       const post = this.postRepository.create({
         title,
@@ -74,14 +66,6 @@ export class PostsService {
 
   async update(id: number, updatePostDto: UpdatePostDto) {
     try {
-      const allowedUpdates = ['title', 'content', 'tags', 'imageUrl'];
-      if (!this.checkExtraFields(updatePostDto, allowedUpdates)) {
-        return new HttpException(
-          'Invalid updates! Only these fields are allowed: title, content, tags, imageUrl',
-          HttpStatus.BAD_REQUEST,
-        );
-      }
-
       const post = await this.postRepository.findOne({ where: { id } });
       if (!post) {
         return new HttpException('Post not found', HttpStatus.NOT_FOUND);
@@ -111,10 +95,5 @@ export class PostsService {
     } catch (error) {
       return new HttpException('Cant remove post', HttpStatus.BAD_REQUEST);
     }
-  }
-
-  checkExtraFields(body: CreatePostDto, allowedFields: string[]) {
-    const updates = Object.keys(body);
-    return updates.every((update) => allowedFields.includes(update));
   }
 }
